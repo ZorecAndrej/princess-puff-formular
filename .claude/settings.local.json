@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(copy \"d:\\PrincessPuff\\slike\\DSC_3776 (1).JPG\" \"D:\\dev\\princess-puff-formular\\hero-image.jpg\")",
+      "Bash(cmd /c copy \"d:\\PrincessPuff\\slike\\DSC_3776 (1).JPG\" \"D:\\dev\\princess-puff-formular\\hero-image.jpg\")",
+      "Bash(powershell -Command \"Copy-Item ''d:\\PrincessPuff\\slike\\DSC_3776 (1).JPG'' ''D:\\dev\\princess-puff-formular\\hero-image.jpg''\")",
+      "Bash(powershell -Command:*)",
+      "Bash(dir:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

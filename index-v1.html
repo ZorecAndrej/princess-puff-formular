@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Princess Puff - Customer Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gold': '#C9A961',
+                        'gold-light': '#D4B975',
+                        'dark': '#0a0a0a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+        }
+
+        .brand-title {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.05em;
+        }
+
+        .form-container {
+            background: #0a0a0a;
+            border: 1px solid #C9A961;
+        }
+
+        .input-field {
+            background: #000000;
+            border: 1px solid #2a2a2a;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #C9A961;
+            box-shadow: 0 0 0 1px #C9A961;
+        }
+
+        .input-field::placeholder {
+            color: #666666;
+        }
+
+        label {
+            color: #C9A961;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .submit-btn {
+            background: #C9A961;
+            color: #000000;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid #C9A961;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: #C9A961;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .crown-icon {
+            width: 60px;
+            height: 60px;
+            fill: #C9A961;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideInRight 0.4s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .spinner {
+            border: 2px solid #333;
+            border-top: 2px solid #C9A961;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .consent-box {
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+        }
+
+        select option {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        /* Custom checkbox */
+        input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #C9A961;
+            background: #000000;
+            cursor: pointer;
+            position: relative;
+        }
+
+        input[type="checkbox"]:checked {
+            background: #C9A961;
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000000;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-12 px-4">
+    <div class="max-w-2xl mx-auto animate-fade-in-up">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <!-- Crown SVG -->
+            <svg class="crown-icon mb-6" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 24L15 36L23 24L32 36L41 24L49 36L57 24V44H7V24Z"/>
+                <path d="M10 44H54V48H10V44Z"/>
+                <circle cx="15" cy="24" r="3"/>
+                <circle cx="23" cy="24" r="3"/>
+                <circle cx="32" cy="20" r="4"/>
+                <circle cx="41" cy="24" r="3"/>
+                <circle cx="49" cy="24" r="3"/>
+            </svg>
+
+            <h1 class="brand-title text-5xl md:text-6xl font-semibold text-gold mb-3">
+                Princess Puff
+            </h1>
+            <p class="text-gold-light text-sm uppercase tracking-widest mb-4">Belgrade</p>
+            <div class="w-16 h-px bg-gold mx-auto mb-6"></div>
+            <p class="text-gray-400 text-sm max-w-md mx-auto">
+                Join our exclusive community for special offers, birthday surprises, and early access to new creations
+            </p>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container p-8 md:p-12">
+            <form id="customerForm" class="space-y-8">
+                <!-- Name Fields -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="firstName" class="block mb-3">
+                            First Name <span class="text-gold">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            required
+                            class="input-field w-full px-4 py-3 focus:outline-none"
+                            placeholder="Jane"
+                        >
+                    </div>
+                    <div>
+                        <label for="lastName" class="block mb-3">
+                            Last Name <span class="text-gold">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            required
+                            class="input-field w-full px-4 py-3 focus:outline-none"
+                            placeholder="Doe"
+                        >
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block mb-3">
+                        Email Address <span class="text-gold">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        class="input-field w-full px-4 py-3 focus:outline-none"
+                        placeholder="jane@example.com"
+                    >
+                </div>
+
+                <!-- Phone -->
+                <div>
+                    <label for="phone" class="block mb-3">
+                        Phone Number <span class="text-gold">*</span>
+                    </label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        required
+                        class="input-field w-full px-4 py-3 focus:outline-none"
+                        placeholder="+381 60 123 4567"
+                    >
+                </div>
+
+                <!-- Birthday -->
+                <div>
+                    <label for="birthday" class="block mb-3">
+                        Birthday <span class="text-gray-500 text-xs normal-case">(Optional)</span>
+                    </label>
+                    <input
+                        type="date"
+                        id="birthday"
+                        name="birthday"
+                        class="input-field w-full px-4 py-3 focus:outline-none"
+                    >
+                </div>
+
+                <!-- How did you hear about us -->
+                <div>
+                    <label for="referral" class="block mb-3">
+                        How did you hear about us? <span class="text-gray-500 text-xs normal-case">(Optional)</span>
+                    </label>
+                    <select
+                        id="referral"
+                        name="referral"
+                        class="input-field w-full px-4 py-3 focus:outline-none"
+                    >
+                        <option value="">Select an option</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="friend">Friend/Family</option>
+                        <option value="google">Google Search</option>
+                        <option value="walking-by">Walking by</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Favorite Product -->
+                <div>
+                    <label for="favoriteProduct" class="block mb-3">
+                        Favorite Product <span class="text-gray-500 text-xs normal-case">(Optional)</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="favoriteProduct"
+                        name="favoriteProduct"
+                        class="input-field w-full px-4 py-3 focus:outline-none"
+                        placeholder="e.g., Raspberry Dream, Chocolate Bliss"
+                    >
+                </div>
+
+                <!-- Marketing Consent -->
+                <div class="consent-box p-6 mt-8">
+                    <label class="flex items-start cursor-pointer">
+                        <input
+                            type="checkbox"
+                            id="consent"
+                            name="consent"
+                            required
+                        >
+                        <span class="ml-4 text-gray-400 text-sm leading-relaxed">
+                            I agree to receive promotional emails, special offers, and updates from Princess Puff.
+                            You may unsubscribe at any time. <span class="text-gold">*</span>
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                    type="submit"
+                    id="submitBtn"
+                    class="submit-btn w-full py-4 mt-8"
+                >
+                    Submit
+                </button>
+
+                <p class="text-center text-xs text-gray-600 mt-6">
+                    We respect your privacy. Your information will never be shared with third parties.
+                </p>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-12">
+            <p class="text-xs text-gray-600">© 2025 Princess Puff Belgrade. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="form-handler.js"></script>
+</body>
+</html>
