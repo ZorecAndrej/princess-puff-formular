@@ -1,0 +1,17 @@
+# AI Assistant Instructions (private, local only)
+claude.md
+
+# Project documentation (local development notes)
+PROJECT-DOCUMENTATION.md
+
+# Claude Code settings (local)
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup/old versions
+*-v1.*
+*-v2.*
+*v2.*

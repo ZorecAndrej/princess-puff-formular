@@ -1,268 +1,192 @@
-# 🧁 Princess Puff - Customer Sign-Up Form
+# 👑 Princess Puff - Forma za Registraciju Kupaca
 
-A beautiful, modern customer data collection form for Princess Puff patisserie. Collect customer information with automatic Google Sheets integration.
-
-## ✨ Features
-
-- 📱 **Fully Responsive** - Works perfectly on desktop, tablet, and mobile
-- 🎨 **Beautiful Design** - Modern pink/purple gradient theme
-- ✅ **Form Validation** - Client-side validation for all fields
-- 📊 **Google Sheets Integration** - Automatic data collection in spreadsheet
-- 📧 **Email Notifications** - Optional welcome emails for customers
-- 🎂 **Birthday Tracking** - Collect birthdays for special offers
-- 🔒 **GDPR Compliant** - Marketing consent checkbox
-- ⚡ **Fast & Lightweight** - No heavy frameworks required
-
-## 📋 Collected Data
-
-- First Name & Last Name
-- Email Address
-- Phone Number
-- Birthday (optional)
-- How they heard about you (optional)
-- Favorite product (optional)
-- Marketing consent
-- Timestamp
-
-## 🚀 Quick Setup (15 minutes)
-
-### Step 1: Create Google Sheet
-
-1. Go to [Google Sheets](https://sheets.google.com)
-2. Create a new spreadsheet
-3. Name it "Princess Puff Customers" (or any name you prefer)
-
-### Step 2: Setup Apps Script
-
-1. In your Google Sheet, click **Extensions** → **Apps Script**
-2. Delete any existing code in the editor
-3. Copy the **entire content** from `google-apps-script.js` file
-4. Paste it into the Apps Script editor
-5. Click the **Save** icon (💾) and name the project "Princess Puff Form Handler"
-
-### Step 3: Deploy Web App
-
-1. In Apps Script editor, click **Deploy** → **New deployment**
-2. Click the gear icon ⚙️ next to "Select type"
-3. Select **Web app**
-4. Configure the deployment:
-   - **Description**: "Princess Puff Form v1"
-   - **Execute as**: **Me** (your email)
-   - **Who has access**: **Anyone**
-5. Click **Deploy**
-6. If prompted, click **Authorize access** and grant permissions
-7. **Copy the Web App URL** (it looks like: `https://script.google.com/macros/s/ABC123.../exec`)
-
-### Step 4: Connect Form to Google Sheets
-
-1. Open `form-handler.js` file in a text editor
-2. Find line 2: `const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';`
-3. Replace `YOUR_GOOGLE_SCRIPT_URL_HERE` with your Web App URL from Step 3
-4. Save the file
-
-Example:
-```javascript
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/ABC123DEF456GHI789/exec';
-```
-
-### Step 5: Test Your Form
-
-1. Open `index.html` in a web browser (double-click the file)
-2. Fill out the form with test data
-3. Click "Join the Sweet Community"
-4. Check your Google Sheet - the data should appear!
-
-## 📧 Optional: Enable Email Notifications
-
-### Welcome Email for Customers
-
-1. Open `google-apps-script.js` in Apps Script editor
-2. Find the `sendWelcomeEmail` function
-3. Customize the email content (subject, body, discount code)
-4. The email will automatically send when customers sign up
-
-### Owner Notifications
-
-1. In `google-apps-script.js`, find the `sendOwnerNotification` function
-2. Replace `YOUR_EMAIL@example.com` with your actual email
-3. Uncomment this line:
-   ```javascript
-   // MailApp.sendEmail(ownerEmail, subject, body);
-   ```
-   Remove the `//` to activate it:
-   ```javascript
-   MailApp.sendEmail(ownerEmail, subject, body);
-   ```
-4. Save and deploy a new version
-
-## 🌐 Hosting Options
-
-Choose one of these FREE hosting options:
-
-### Option 1: Netlify (Recommended)
-1. Go to [Netlify](https://www.netlify.com)
-2. Sign up for free
-3. Drag and drop your folder (with all files)
-4. Done! You get a URL like `princess-puff.netlify.app`
-5. Optional: Add custom domain
-
-### Option 2: GitHub Pages
-1. Create a GitHub account
-2. Create a new repository named "princess-puff-form"
-3. Upload all files
-4. Go to Settings → Pages
-5. Select main branch and save
-6. Your site will be at `yourusername.github.io/princess-puff-form`
-
-### Option 3: Vercel
-1. Go to [Vercel](https://vercel.com)
-2. Sign up for free
-3. Import your project
-4. Deploy!
-
-### Option 4: Local Hosting
-- Simply open `index.html` in a browser
-- Share the file with someone on the same network
-- Works offline!
-
-## 🎨 Customization
-
-### Change Colors
-
-Edit `index.html`, find the tailwind.config section:
-
-```javascript
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                'puff-pink': '#FFB6C1',      // Change these!
-                'puff-purple': '#E6B8FF',    // Change these!
-                'puff-cream': '#FFF8F0',     // Change these!
-            }
-        }
-    }
-}
-```
-
-### Add/Remove Form Fields
-
-1. Edit `index.html` to add HTML input fields
-2. Edit `form-handler.js` to collect the new field data
-3. Edit `google-apps-script.js` to add new column headers
-
-### Change Form Text
-
-All text is in `index.html` - just search and replace!
-
-## 📊 View Your Data
-
-### In Google Sheets
-- All customer data appears automatically
-- Sort, filter, and analyze as needed
-- Export to CSV/Excel anytime
-- Create charts and graphs
-
-### Optional: Create Dashboard
-In your Google Sheet's Apps Script, run the `createDashboard()` function to auto-generate a summary dashboard.
-
-## 🔒 Privacy & Security
-
-- All data is stored in YOUR Google account
-- No third-party has access to customer data
-- SSL encrypted (when hosted online)
-- GDPR compliant with consent checkbox
-- No cookies, no tracking scripts
-
-## 📱 Mobile Friendly
-
-The form automatically adjusts to:
-- Phones (320px+)
-- Tablets (768px+)
-- Desktops (1024px+)
-
-## 🐛 Troubleshooting
-
-### Form submits but no data in Sheet
-- Double-check the Web App URL in `form-handler.js`
-- Make sure you deployed the Apps Script as "Anyone" can access
-- Check Apps Script executions: **Extensions** → **Apps Script** → **Executions**
-
-### Email notifications not working
-- Check your Gmail quota (100 emails/day for free accounts)
-- Verify email addresses are correct
-- Check spam folder
-- Ensure MailApp.sendEmail line is uncommented
-
-### Form doesn't load
-- Open browser console (F12) to see errors
-- Ensure all 3 files are in the same folder
-
-### Styling looks broken
-- Check your internet connection (Tailwind loads from CDN)
-- Try a different browser
-
-## 🆘 Support
-
-### Need Help?
-- Check [Google Apps Script Documentation](https://developers.google.com/apps-script)
-- Review [Tailwind CSS Docs](https://tailwindcss.com)
-
-## 📈 Next Steps
-
-### Free CRM Integration
-Export your Google Sheet to:
-- **Mailchimp** (free up to 500 contacts) - for email marketing
-- **HubSpot** (free CRM) - for contact management
-- **Sendinblue** (free up to 300 emails/day) - for newsletters
-
-### Analytics
-Add Google Analytics to track:
-- Form views
-- Submission rate
-- Traffic sources
-
-### Advanced Features
-- Add SMS notifications (Twilio)
-- Add payment integration
-- Create customer portal
-- Add loyalty points system
+Dobrodošli! Ovo je digitalna forma za prikupljanje podataka o kupcima za Princess Puff poslastičarnicu u Beogradu.
 
 ---
 
-## 🇷🇸 Srpski (Setup u 5 koraka)
+## 🌐 Vaša Forma
 
-### Korak 1: Napravi Google Sheet
-1. Idi na [Google Sheets](https://sheets.google.com)
-2. Napravi novu tabelu "Princess Puff Mušterije"
+**Link**: https://princess-puff-form.netlify.app
 
-### Korak 2: Podesi Apps Script
-1. Extensions → Apps Script
-2. Obriši postojeći kod
-3. Kopiraj SVE iz `google-apps-script.js`
-4. Nalepi i sačuvaj
-
-### Korak 3: Deploy Web App
-1. Deploy → New deployment → Web app
-2. Execute as: **Me**
-3. Who has access: **Anyone**
-4. Deploy i **kopiraj URL**
-
-### Korak 4: Poveži formu
-1. Otvori `form-handler.js`
-2. Linija 2: ubaci svoj URL umesto `YOUR_GOOGLE_SCRIPT_URL_HERE`
-3. Sačuvaj
-
-### Korak 5: Testiraj
-1. Otvori `index.html` u browser-u
-2. Popuni formu
-3. Proveri Google Sheet!
-
-### Hosting (besplatno)
-- **Netlify**: Prevuci folder na netlify.com
-- **GitHub Pages**: Upload na GitHub, uključi Pages
-- **Lokalno**: Samo otvori `index.html`
+Ovu formu mogu korisnici otvoriti u browseru ili skenirati QR kodom.
 
 ---
 
-Made with 💖 for Princess Puff
+## 📱 Kako Funkcioniše?
+
+1. **Kupac otvori formu** (browser ili QR kod)
+2. **Popuni svoje podatke**:
+   - Ime i prezime
+   - Email adresa
+   - Telefon
+   - Datum rođenja (opciono)
+   - Kako je čuo za vas (opciono)
+   - Omiljena poslastica (opciono)
+3. **Klikne "Pošalji"**
+4. **Automatski se dešavaju 3 stvari**:
+   - ✅ Podaci se čuvaju u Google tabeli
+   - 📧 Kupac dobija welcome email
+   - 📧 Vi dobijate email notifikaciju
+
+---
+
+## 📊 Gde Su Podaci?
+
+Svi podaci se automatski čuvaju u **Google Sheet** tabeli:
+- **Naziv**: Princess Puff Customers
+- **Pristup**: orders@princesspuff.com
+
+### Kolone u tabeli:
+- **Timestamp** - Datum i vreme prijave
+- **First Name** - Ime
+- **Last Name** - Prezime
+- **Email** - Email adresa
+- **Phone** - Telefon
+- **Birthday** - Datum rođenja
+- **How They Heard** - Kako su čuli za vas
+- **Favorite Taste** - Omiljena poslastica
+- **Marketing Consent** - Pristanak za marketing
+
+---
+
+## 📧 Email Poruke
+
+### Welcome Email (za kupca)
+- **Šalje se na**: Kupčev email
+- **Subject**: "Welcome to Princess Puff Community! 🎉"
+- **Jezik**: Turski + Engleski
+
+### Admin Notification (za vas)
+- **Šalje se na**: orders@princesspuff.com
+- **Subject**: "New Customer Registration: [Ime Prezime]"
+- **Sadrži**: Sve podatke koje je kupac uneo
+
+---
+
+## 🖨️ QR Kod - Kako Koristiti
+
+QR kod omogućava kupcima da brzo pristupe formi:
+
+**Gde staviti QR kod**:
+- Na kasi u radnji
+- Na meniju
+- Na posteru na zidu
+- Na vizit kartama
+- Na Instagram/Facebook postovima
+
+**Tekst za QR kod** (dodajte pored koda):
+> "Skeniraj i pridruži se našoj zajednici!"
+> "Dobij ekskluzivne ponude i popuste!"
+
+---
+
+## ✨ Prednosti Forme
+
+✅ **Automatizovano** - Nema ručnog unosa podataka
+✅ **Brzo** - Kupci popune za 1-2 minuta
+✅ **Mobilno** - Radi na telefonima i tabletima
+✅ **Email Marketing** - Imate bazu za newsletter
+✅ **Rođendani** - Možete slati rođendanske čestitke
+✅ **Bez Duplikata** - Isti email ne može se registrovati dva puta
+
+---
+
+## 🎨 Jezik i Dizajn
+
+**Forma je na turskom jeziku** (jer su vaši kupci uglavnom Turci):
+- Naslovi i labele: Turski
+- Poruke: Turski
+- Email: Turski + Engleski
+
+**Podaci se čuvaju na engleskom** (u Google tabeli).
+
+---
+
+## 🔒 Sigurnost i Privatnost
+
+- ✅ Forma je sigurna (HTTPS)
+- ✅ Podaci se čuvaju u vašem Google Sheet-u
+- ✅ Samo vi imate pristup podacima
+- ✅ Kupci mogu da daju pristanak za marketing
+- ✅ Duplikati su blokirani (isti email ne može dva puta)
+
+---
+
+## 🎯 Kako Koristiti Podatke?
+
+### 1. Email Marketing
+- Šaljite newsletter sa novim poslasticama
+- Šaljite specijalne ponude
+- Obaveštavajte o akcijama
+
+### 2. Rođendanski Popusti
+- Filtrirajte rođendane po mesecu
+- Šaljite rođendanske čestitke
+- Nudite specijalne popuste
+
+### 3. Analitika
+- Vidite kako kupci čuju za vas
+- Vidite koje poslastice su najomiljenije
+- Pratite rast baze kupaca
+
+### 4. VIP Kupci
+- Napravite listu vernih kupaca
+- Nudite ekskluzivne benefite
+
+---
+
+## 🛠️ Ako Nešto Treba Promeniti
+
+**Šta možete promeniti**:
+- Tekst na formi (pitanja, poruke)
+- Boje i dizajn
+- Email poruke
+- Polja u formi (dodati/ukloniti)
+
+**Za izmene kontaktirajte**: Andrej Zorec
+
+---
+
+## 🐛 Ako Nešto Ne Radi
+
+### Forma se ne učitava
+- Proverite internet konekciju
+- Probajte drugi browser
+- Osvežite stranicu (F5)
+
+### Podaci ne stižu u tabelu
+- Proverite da li forma kaže "Success!"
+- Proverite Google Sheet pristup
+- Kontaktirajte developera
+
+### Email ne stiže
+- Proverite spam folder
+- Proverite da li je email adresa tačna
+
+**Za tehničku podršku**: jarredcozen@gmail.com
+
+---
+
+## ✅ Sve Je Spremno!
+
+Forma je **LIVE i radi perfektno**:
+- ✅ Online na https://princess-puff-form.netlify.app
+- ✅ Povezana sa Google Sheet-om
+- ✅ Email notifikacije aktivne
+- ✅ Mobilno responsive
+
+**Počnite da je koristite odmah!**
+
+---
+
+## 📞 Kontakt
+
+**Developer**: Andrej Zorec
+**Email**: jarredcozen@gmail.com
+**GitHub**: https://github.com/ZorecAndrej/princess-puff-formular
+
+---
+
+**Verzija**: 1.0
+**Datum**: Novembar 2025
+**Status**: 🟢 Online i funkcionalna
